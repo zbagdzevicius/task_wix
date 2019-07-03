@@ -3,20 +3,19 @@
   var ImageFinder = window.CLASSES.ImageFinder = function () {};
 
   ImageFinder.prototype.search = function (query) {
+    const result = window.DATA.staticImagesDb
+    .filter(item => item.title.includes(query))
+    .map(item => {
+      return {
+        id: item.id,
+        url: item.url,
+        title: item.title
+      }
+    });
+
     return {
-      query: 'demo',
-      images: [
-        {
-          id:'1',
-          url:'http://image.shutterstock.com/display_pic_with_logo/347836/99127196/stock-photo-demo-icon-99127196.jpg',
-          title:'demo image 1'
-        },
-        {
-          id:'2',
-          url:'http://t2.ftcdn.net/jpg/00/30/42/21/400_F_30422159_lzSKGlGNX1YcKGuIFDiEyZbmCF3hacIB.jpg',
-          title:'demo image 2'
-        }
-      ]
+      query: query,
+      images: result
     };
   }
 
