@@ -1,22 +1,20 @@
-(function () {
+(function() {
+  /**
+   * @constructor
+   * @param {static} staticImagesModule
+   * @param {flickr} flickrImagesFinder
+   */
+  var ImageFinder = (window.CLASSES.ImageFinder = function(staticImagesModule) {
+    this._staticImagesModule = staticImagesModule;
+  });
 
-  var ImageFinder = window.CLASSES.ImageFinder = function () {};
-
-  ImageFinder.prototype.search = function (query) {
-    const result = window.DATA.staticImagesDb
-    .filter(item => item.title.includes(query))
-    .map(item => {
-      return {
-        id: item.id,
-        url: item.url,
-        title: item.title
-      }
-    });
-
-    return {
-      query: query,
-      images: result
-    };
-  }
-
+  ImageFinder.prototype.search = function(query, moduleId) {
+    let result = { query: query, images: [] };
+    if (moduleId === "static") {
+      result.images = this._staticImagesModule.search(query);
+    } else {
+      throw Error("Wrong module");
+    }
+    return result;
+  };
 })();
