@@ -3,8 +3,8 @@
   var static = window.MODULES.static = function () { };
 
   /**
-   * Search the images in static-images-db
-    @param query -> a phrase added in a search imput field
+   * Search the images  static-images-db 
+    @param query -> get individual results
    *  
    */
   static.prototype.search = function (query) {
@@ -17,7 +17,7 @@
           title: item.title
         }
       });
-      return images;
+      return {query, images};
   }
 
 })(); 
